@@ -1,15 +1,21 @@
-import { readFile, writeFile } from 'fs/promises';
+import { MessagesRepository } from './messages.repository';
 
-export class MessagesRespository {
-    async findOne(id: string) {
-        const contents = await readFile('messages.json', 'utf8');
+export class MessagesService {
+    messagesRepo: MessagesRepository
+    
+    constructor() {
+        this.messagesRepo = new MessagesRepository();
     }
 
-    async findAll() {
-
+    findOne(id: string) {
+        return this.messagesRepo.findOne(id);
     }
 
-    async create(message: string) {
-
+    findAll() {
+        return this.messagesRepo.findAll();
     }
-}
+
+    create(content: string) {
+        return this.messagesRepo.create(content);
+    }
+ }
